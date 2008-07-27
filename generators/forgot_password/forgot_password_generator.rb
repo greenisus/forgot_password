@@ -9,7 +9,8 @@ class ForgotPasswordGenerator < Rails::Generator::NamedBase
                 :controller_class_name,
                 :controller_singular_name,
                 :controller_plural_name,
-                :controller_file_name
+                :controller_file_name,
+                :user_model_name
   alias_method  :controller_table_name, :controller_plural_name
 
   def initialize(runtime_args, runtime_options = {})
