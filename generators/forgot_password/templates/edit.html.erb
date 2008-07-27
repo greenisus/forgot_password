@@ -1,0 +1,24 @@
+<h1>Editing password</h1>
+
+<%% form_for(@password) do |f| %>
+  <%%= f.error_messages %>
+
+  <p>
+    <%%= f.label :user_id %><br />
+    <%%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%%= f.label :reset_code %><br />
+    <%%= f.text_field :reset_code %>
+  </p>
+  <p>
+    <%%= f.label :expiration_date %><br />
+    <%%= f.datetime_select :expiration_date %>
+  </p>
+  <p>
+    <%%= f.submit "Update" %>
+  </p>
+<%% end %>
+
+<%%= link_to 'Show', @password %> |
+<%%= link_to 'Back', passwords_path %>
