@@ -11,7 +11,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   def create
     @<%= file_name %> = <%= class_name %>.new(params[:<%= file_name %>])
-    @<%= file_name %>.<%= controller_singular_name %> = <%= controller_singular_name.capitalize %>.find_by_email(@<%= file_name %>.email)
+    @<%= file_name %>.<%= user_model_name %> = <%= user_model_name.capitalize %>.find_by_email(@<%= file_name %>.email)
     
     respond_to do |format|
       if @<%= file_name %>.save
@@ -28,7 +28,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   def reset
     begin
-      @<%= controller_singular_name %> = <%= class_name %>.find(:first, :conditions => ['reset_code = ? and expiration_date > ?', params[:reset_code], Time.now]).<%= controller_singular_name %>
+      @<%= user_model_name %> = <%= class_name %>.find(:first, :conditions => ['reset_code = ? and expiration_date > ?', params[:reset_code], Time.now]).<%= user_model_name %>
     rescue
       flash[:notice] = 'The change password URL you visited is either invalid or expired.'
       redirect_to(new_<%= file_name %>_path)
@@ -36,10 +36,10 @@ class <%= controller_class_name %>Controller < ApplicationController
   end
 
   def update_after_forgetting
-    @<%= controller_singular_name %> = <%= class_name %>.find_by_reset_code(params[:reset_code]).<%= controller_singular_name %>
+    @<%= user_model_name %> = <%= class_name %>.find_by_reset_code(params[:reset_code]).<%= user_model_name %>
     
     respond_to do |format|
-      if @<%= controller_singular_name %>.update_attributes(params[:<%= controller_singular_name %>])
+      if @<%= user_model_name %>.update_attributes(params[:<%= user_model_name %>])
         flash[:notice] = 'Password was successfully updated.'
         format.html { redirect_to(:action => :reset, :reset_code => params[:reset_code]) }
       else
