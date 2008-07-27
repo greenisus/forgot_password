@@ -108,6 +108,7 @@ class ForgotPasswordGenerator < Rails::Generator::NamedBase
 
       m.route_resources  controller_plural_name
       m.route_name('change_password', '/change_password/:reset_code', { :controller => controller_plural_name, :action => 'reset' })
+      m.route_name('forgot_password', '/forgot_password', { :controller => controller_plural_name, :action => 'new' })
 
     end
 
