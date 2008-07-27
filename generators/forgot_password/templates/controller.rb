@@ -1,27 +1,27 @@
 class <%= controller_class_name %>Controller < ApplicationController
 
   def new
-    @password = <%= class_name %>.new
+    @<%= file_name %> = <%= class_name %>.new
     
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @password }
+      format.xml  { render :xml => @<%= file_name %> }
     end
   end
 
   def create
-    @password = <%= class_name %>.new(params[:password])
-    @password.user = User.find_by_email(@password.email)
+    @<%= file_name %> = <%= class_name %>.new(params[:<%= file_name %>])
+    @<%= file_name %>.user = User.find_by_email(@<%= file_name %>.email)
     
     respond_to do |format|
-      if @password.save
-        PasswordMailer.deliver_forgot_password(@password)
-        flash[:notice] = "A link to change your password has been sent to #{@password.email}."
+      if @<%= file_name %>.save
+        <%= class_name %>Mailer.deliver_forgot_password(@<%= file_name %>)
+        flash[:notice] = "A link to change your password has been sent to #{@<%= file_name %>.email}."
         format.html { redirect_to(:action => 'new') }
-        format.xml  { render :xml => @password, :status => :created, :location => @password }
+        format.xml  { render :xml => @<%= file_name %>, :status => :created, :location => @<%= file_name %> }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @password.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => @<%= file_name %>.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -31,7 +31,7 @@ class <%= controller_class_name %>Controller < ApplicationController
       @user = <%= class_name %>.find(:first, :conditions => ['reset_code = ? and expiration_date > ?', params[:reset_code], Time.now]).user
     rescue
       flash[:notice] = 'The change password URL you visited is either invalid or expired.'
-      redirect_to(new_password_path)
+      redirect_to(new_<%= file_name %>_path)
     end    
   end
 
@@ -50,16 +50,16 @@ class <%= controller_class_name %>Controller < ApplicationController
   end
   
   def update
-    @password = <%= class_name %>.find(params[:id])
+    @<%= file_name %> = <%= class_name %>.find(params[:id])
 
     respond_to do |format|
-      if @password.update_attributes(params[:password])
+      if @<%= file_name %>.update_attributes(params[:<%= file_name %>])
         flash[:notice] = 'Password was successfully updated.'
-        format.html { redirect_to(@password) }
+        format.html { redirect_to(@<%= file_name %>) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @password.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => @<%= file_name %>.errors, :status => :unprocessable_entity }
       end
     end
   end

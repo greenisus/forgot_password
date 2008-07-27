@@ -1,6 +1,6 @@
 require 'digest/sha1'
 
-class Password < ActiveRecord::Base
+class <%= class_name %> < ActiveRecord::Base
   belongs_to :user
   attr_accessor :email
   validates_presence_of :email, :user

@@ -56,10 +56,7 @@ class ForgotPasswordGenerator < Rails::Generator::NamedBase
         m.directory File.join('spec/fixtures', class_path)
       end
 
-      m.template 'model.rb',
-                  File.join('app/models',
-                            class_path,
-                            "#{file_name}.rb")
+      m.template 'model.rb', File.join('app/models', class_path, "#{file_name}.rb")
 
       m.template 'mailer.rb',
                   File.join('app/models', class_path, "#{file_name}_mailer.rb")
@@ -93,7 +90,6 @@ class ForgotPasswordGenerator < Rails::Generator::NamedBase
                             "#{controller_file_name}_helper.rb")
 
       # Controller templates
-      m.template 'edit.html.erb',  File.join('app/views', controller_class_path, controller_file_name, "edit.html.erb")
       m.template 'new.html.erb',  File.join('app/views', controller_class_path, controller_file_name, "new.html.erb")
       m.template 'reset.html.erb',  File.join('app/views', controller_class_path, controller_file_name, "reset.html.erb")
 

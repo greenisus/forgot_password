@@ -1,4 +1,4 @@
-class PasswordMailer < ActionMailer::Base
+class <%= class_name %>Mailer < ActionMailer::Base
   
   def forgot_password(password)
     setup_email(password.user)
