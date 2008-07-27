@@ -1,4 +1,4 @@
-# require 'restful_authentication/rails_commands'
+require File.expand_path(File.dirname(__FILE__) + "/lib/insert_routes.rb")
 class ForgotPasswordGenerator < Rails::Generator::NamedBase
                   
   attr_reader   :controller_name,
@@ -107,6 +107,8 @@ class ForgotPasswordGenerator < Rails::Generator::NamedBase
       # end
 
       m.route_resources  controller_plural_name
+      m.route_name('change_password', '/change_password/:reset_code', { :controller => controller_plural_name, :action => 'reset' })
+
     end
 
     action = nil
@@ -114,12 +116,12 @@ class ForgotPasswordGenerator < Rails::Generator::NamedBase
     case action
       when "generate" 
         puts
-        puts ("-" * 70)
-        puts "Don't forget to add this to config/routes.rb:"
-        puts
-        puts %(map.change_password '/change_password/:reset_code', :controller => 'passwords', :action => 'reset')
-        puts
-        puts ("-" * 70)
+        # puts ("-" * 70)
+        # puts "Don't forget to add this to config/routes.rb:"
+        # puts
+        # puts %(map.change_password '/change_password/:reset_code', :controller => 'passwords', :action => 'reset')
+        # puts
+        # puts ("-" * 70)
         puts
       when "destroy" 
         puts
