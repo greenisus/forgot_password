@@ -1,9 +1,9 @@
 require 'digest/sha1'
 
 class <%= class_name %> < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :<%= controller_singular_name %>
   attr_accessor :email
-  validates_presence_of :email, :user
+  validates_presence_of :email, :<%= controller_singular_name %>
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => 'is not a valid email address'
 
   protected

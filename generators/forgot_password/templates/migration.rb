@@ -1,7 +1,7 @@
 class <%= migration_name %> < ActiveRecord::Migration
   def self.up
     create_table "<%= table_name %>" do |t|
-      t.integer :user_id
+      t.integer :<%= controller_singular_name %>_id
       t.string :reset_code
       t.datetime :expiration_date
 
