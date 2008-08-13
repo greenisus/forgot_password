@@ -79,10 +79,10 @@ class ForgotPasswordGenerator < Rails::Generator::NamedBase
                               "#{table_name}.yml")
       end
 
-      m.template 'rspec_controller:helper_spec.rb',
+      m.template 'helper.rb',
                   File.join('app/helpers',
-                            controller_class_path,
-                            "#{controller_file_name}_helper.rb")
+                          controller_class_path,
+                          "#{controller_file_name}_helper.rb")
 
       # Controller templates
       m.template 'new.html.erb',  File.join('app/views', controller_class_path, controller_file_name, "new.html.erb")
